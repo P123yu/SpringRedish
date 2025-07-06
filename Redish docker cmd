@@ -1,0 +1,106 @@
+PS C:\Users\piyush_kumar> docker pull redis
+Using default tag: latest
+latest: Pulling from library/redis
+3da95a905ed5: Pull complete
+db655ba2dcca: Pull complete
+4ef8fa7693bb: Pull complete
+881b4a6fb2ec: Pull complete
+6d7393f5b310: Pull complete
+4f4fb700ef54: Pull complete
+ab22bb3606ca: Pull complete
+Digest: sha256:b43d2dcbbdb1f9e1582e3a0f37e53bf79038522ccffb56a25858969d7a9b6c11
+Status: Downloaded newer image for redis:latest
+docker.io/library/redis:latest
+
+What's next:
+    View a summary of image vulnerabilities and recommendations → docker scout quickview redis
+PS C:\Users\piyush_kumar> docker run --name my-redis -p 6379:6379 -d redis
+096641cc189a82d3de147750ff2066eb8613fc3bfd42a6c1d7161ce97acbffdc
+PS C:\Users\piyush_kumar> docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS                    NAMES
+096641cc189a   redis     "docker-entrypoint.s…"   13 seconds ago   Up 11 seconds   0.0.0.0:6379->6379/tcp   my-redis
+PS C:\Users\piyush_kumar> docker exec -it my-redis redis-cli
+127.0.0.1:6379> KEYS *
+(empty array)
+127.0.0.1:6379> KEYS *
+(empty array)
+127.0.0.1:6379> KEYS *
+(empty array)
+127.0.0.1:6379> KEYS *
+(empty array)
+127.0.0.1:6379> KEYS *
+(empty array)
+127.0.0.1:6379> KEYS *
+(empty array)
+127.0.0.1:6379> INFO server
+# Server
+redis_version:8.0.2
+redis_git_sha1:00000000
+redis_git_dirty:1
+redis_build_id:e26b76554fc1ebea
+redis_mode:standalone
+os:Linux 5.15.133.1-microsoft-standard-WSL2 x86_64
+arch_bits:64
+monotonic_clock:POSIX clock_gettime
+multiplexing_api:epoll
+atomicvar_api:c11-builtin
+gcc_version:12.2.0
+process_id:1
+process_supervised:no
+run_id:eb759fc6d6625021b50d8a6a1de3d504b0b427c6
+tcp_port:6379
+server_time_usec:1751797030070595
+uptime_in_seconds:1018
+uptime_in_days:0
+hz:10
+configured_hz:10
+lru_clock:6966565
+executable:/data/redis-server
+config_file:
+io_threads_active:0
+listener0:name=tcp,bind=*,bind=-::*,port=6379
+127.0.0.1:6379> SET my:cli:test:key "Hello from redis-cli!"
+OK
+127.0.0.1:6379> GET my:cli:test:key
+"Hello from redis-cli!"
+127.0.0.1:6379> KEYS *
+1) "my:cli:test:key"
+127.0.0.1:6379> KEYS *
+1) "my:cli:test:key"
+127.0.0.1:6379> KEYS *
+1) "my:cli:test:key"
+127.0.0.1:6379> KEYS *
+1) "my:cli:test:key"
+127.0.0.1:6379> KEYS *
+1) "my:direct:test:key"
+2) "my:cli:test:key"
+127.0.0.1:6379> KEYS *
+1) "students::7"
+2) "my:direct:test:key"
+3) "my:cli:test:key"
+127.0.0.1:6379> GET students::7
+"{\"@class\":\"com.redish.SpringRedish.model.Student\",\"id\":7,\"name\":\"John Doe\",\"city\":\"New York\"}"
+127.0.0.1:6379> KEYS *
+1) "students::7"
+2) "students::8"
+3) "my:direct:test:key"
+4) "my:cli:test:key"
+127.0.0.1:6379> GET students::8
+"{\"@class\":\"com.redish.SpringRedish.model.Student\",\"id\":8,\"name\":\"John Doe\",\"city\":\"New York\"}"
+127.0.0.1:6379> GET students::8
+"{\"@class\":\"com.redish.SpringRedish.model.Student\",\"id\":8,\"name\":\"mohan\",\"city\":\"pune\"}"
+127.0.0.1:6379> KEYS *
+1) "students::7"
+2) "my:direct:test:key"
+3) "my:cli:test:key"
+127.0.0.1:6379> KEYS *
+1) "my:direct:test:key"
+2) "my:cli:test:key"
+127.0.0.1:6379> KEYS *
+1) "my:direct:test:key"
+2) "my:cli:test:key"
+127.0.0.1:6379> KEYS *
+1) "students::9"
+2) "my:direct:test:key"
+3) "my:cli:test:key"
+127.0.0.1:6379>
